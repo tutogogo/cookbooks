@@ -1,6 +1,6 @@
 actions :auto_attach
 
-default_action :auto_attach
+#default_action :auto_attach
 
 attribute :mount_point,        :kind_of => String
 attribute :disk_count,         :kind_of => Integer
