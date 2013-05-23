@@ -90,6 +90,10 @@ if platform?('windows')
   end
 end
 
+  service "mysql" do
+    action :nothing
+  end
+
 
 node['mysql']['server']['packages'].each do |package_name|
   package package_name do
@@ -208,9 +212,9 @@ unless platform?(%w{mac_os_x})
     mode "0644"
     case node['mysql']['reload_action']
     when 'restart'
-      notifies :restart, "service[mysql]", :immediately
+      notifies :restart, resources(:service => 'mysql'), :immediately
     when 'reload'
-      notifies :reload, "service[mysql]", :immediately
+      notifies :reload, resources(:service => 'mysql'), :immediately
     else
       Chef::Log.info "my.cnf updated but mysql.reload_action is #{node['mysql']['reload_action']}. No action taken."
     end
