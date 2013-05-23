@@ -28,4 +28,5 @@ node['mysql']['client']['packages'].each do |mysql_pack|
   resources("package[#{mysql_pack}]").run_action(:install)
 end
 
-chef_gem "mysql"
+#chef_gem "mysql"
+gem_package "mysql"
