@@ -20,7 +20,7 @@
 # to debian_before_squeeze? and ubuntu_before_lucid?
 ::Chef::Node.send(:include, Opscode::Mysql::Helpers)
 
-case node['platform']
+case node['platform_family']
 when "rhel", "fedora"
   default['mysql']['client']['packages'] = %w{mysql mysql-devel}
 when "suse"
