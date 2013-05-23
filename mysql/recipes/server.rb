@@ -93,9 +93,10 @@ end
 node['mysql']['server']['packages'].each do |package_name|
   package package_name do
     action :install
-    notifies :start, "service[mysql]", :immediately
+    notifies :start, resources(:service => 'mysql'), :immediately
   end
 end
+
 
 unless platform?(%w{mac_os_x})
 
