@@ -1,0 +1,8 @@
+default['mysql']['server_root_password'] = 'root'
+default['mysql']['server_repl_password'] = 'repl'
+default['mysql']['server_debian_password'] = 'root'
+default['mysql']['remove_anonymous_users'] = 'true'
+default['mysql']['remove_test_database'] = 'true'
+default['my-opsworks']['cacti_database'] = 'cacti'
+default['my-opsworks']['cacti_username'] = 'doliadm'
+default['my-opsworks']['cacti_password'] = 'doliadm'
