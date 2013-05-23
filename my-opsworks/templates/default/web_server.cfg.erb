@@ -1,0 +1,14 @@
+define host{
+        use                     linux-server            ; Name of host template to use
+        host_name               <%= @web_host %>
+        alias                   Web Server <%= @web_host %>
+        address                 <%= @web_host %>
+        }
+
+define service{
+        use generic-service
+        host_name <%= @web_host %>
+        service_description CPU Load
+        check_command check_nrpe!check_load
+        }
+

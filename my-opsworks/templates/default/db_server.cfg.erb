@@ -1,0 +1,22 @@
+define host{
+        use                     linux-server            ; Name of host template to use
+        host_name               <%= @db_host %>
+        alias                   Web Server <%= @web_host %>
+        address                 <%= @db_host %>
+        }
+
+define service{
+        use generic-service
+        host_name <%= @db_host %>
+        service_description CPU Load
+        check_command check_nrpe!check_load
+        }
+
+
+define service{
+        use generic-service
+        host_name <%= @db_host %>
+        service_description Free Data Disk space /vol/mysql
+        check_command check_nrpe!check_vol_mysql
+        }
+
