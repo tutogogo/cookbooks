@@ -21,7 +21,7 @@ default['mysql']['bind_address']               = attribute?('cloud') ? cloud['lo
 default['mysql']['port']                       = 3306
 default['mysql']['nice']                       = 0
 
-case node["platform_family"]
+case node["platform"]
 when "debian"
   default['mysql']['server']['packages']      = %w{mysql-server}
   default['mysql']['service_name']            = "mysql"
@@ -247,7 +247,7 @@ default['mysql']['log_dir'] = node['mysql']['data_dir']
 default['mysql']['log_files_in_group'] = false
 default['mysql']['innodb_status_file'] = false
 
-unless node['platform_family'] == "rhel" && node['platform_version'].to_i < 6
+unless node['platform'] == "rhel" && node['platform_version'].to_i < 6
   # older RHEL platforms don't support these options
   default['mysql']['tunable']['event_scheduler']  = 0
   default['mysql']['tunable']['table_open_cache'] = "128"

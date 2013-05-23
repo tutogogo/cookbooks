@@ -90,9 +90,6 @@ if platform?('windows')
   end
 end
 
-service "mysql" do
-	action :nothing
-end
 
 node['mysql']['server']['packages'].each do |package_name|
   package package_name do
