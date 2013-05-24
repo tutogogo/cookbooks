@@ -29,4 +29,4 @@ node['mysql']['client']['packages'].each do |mysql_pack|
 end
 
 #chef_gem "mysql"
-gem_package "mysql"
+OpsWorks::InternalGems.internal_gem_package('mysql')
