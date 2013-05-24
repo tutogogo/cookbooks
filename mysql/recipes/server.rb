@@ -102,9 +102,6 @@ node['mysql']['server']['packages'].each do |package_name|
   end
 end
 
-service "mysql" do
-    action :start
-  end
 
 unless platform?(%w{mac_os_x})
 
