@@ -90,7 +90,7 @@ if platform?('windows')
   end
 end
 
-  service "mysql" do
+service "mysql" do
     service_name node['mysql']['service_name']
 	action :nothing
 end
@@ -102,6 +102,9 @@ node['mysql']['server']['packages'].each do |package_name|
   end
 end
 
+service "mysql" do
+    action :start
+  end
 
 unless platform?(%w{mac_os_x})
 
