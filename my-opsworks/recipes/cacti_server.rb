@@ -24,16 +24,12 @@ end
 
 execute "load_basic_data" do
  command "mysql -uroot -p#{node['mysql']['server_root_password']} #{node[:'my-opsworks'][:'cacti_database']} < /usr/share/doc/cacti-0.8.8a/cacti.sql"
- only_if do
- { ::File.exist?("/usr/share/doc/cacti-0.8.8a/cacti.sql") }
- end
+ only_if {File.exist?("/usr/share/doc/cacti-0.8.8a/cacti.sql")}
 end
 
 execute "remove_cacti_sql" do
-command "rm -f /usr/share/doc/cacti-0.8.8a/cacti.sql"
- only_if do
- { ::File.exist?("/usr/share/doc/cacti-0.8.8a/cacti.sql") }
- end
+  command "rm -f /usr/share/doc/cacti-0.8.8a/cacti.sql"
+ only_if {File.exist?("/usr/share/doc/cacti-0.8.8a/cacti.sql")}
 end
 
 template "/etc/cacti/db.php" do
