@@ -28,5 +28,6 @@ node['mysql']['client']['packages'].each do |mysql_pack|
   resources("package[#{mysql_pack}]").run_action(:install)
 end
 
+
 #chef_gem "mysql"
 OpsWorks::InternalGems.internal_gem_package('mysql')
