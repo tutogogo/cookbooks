@@ -90,12 +90,15 @@ if platform?('windows')
   end
 end
 
-
+  service "mysql" do
+    service_name node['mysql']['service_name']
+	action :nothing
+end
 
 node['mysql']['server']['packages'].each do |package_name|
   package package_name do
     action :install
-    notifies :start, resources(:service => 'mysqld'), :immediately
+    notifies :start, resources(:service => 'mysql'), :immediately
   end
 end
 
