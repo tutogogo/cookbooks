@@ -2,6 +2,7 @@ include_recipe "mysql::ruby"
 include_recipe "mysql::client"
 include_recipe "mysql::server"
 
+
 mysql_database node[:'my-opsworks'][:'cacti_database'] do
   connection ({:host => 'localhost', :username => 'root', :password => node['mysql']['server_root_password']})
   action :create
@@ -20,8 +21,19 @@ package "cacti" do
  action :install
 end
 
+
 execute "load_basic_data" do
  command "mysql -uroot -p#{node['mysql']['server_root_password']} #{node[:'my-opsworks'][:'cacti_database']} < /usr/share/doc/cacti-0.8.8a/cacti.sql"
+ only_if do
+ { ::File.exist?("/usr/share/doc/cacti-0.8.8a/cacti.sql") }
+ end
+end
+
+execute "remove_cacti_sql" do
+command "rm -f /usr/share/doc/cacti-0.8.8a/cacti.sql"
+ only_if do
+ { ::File.exist?("/usr/share/doc/cacti-0.8.8a/cacti.sql") }
+ end
 end
 
 template "/etc/cacti/db.php" do
