@@ -23,18 +23,12 @@ mount "/var/lib/dolibarr/documents" do
     not_if { deploy[:database][:host].nil? }
 end
 
-file "/var/lib/dolibarr/documents/install.lock" do
-  mode 0644
-  action :create
-  not_if { ::File.exist?("/var/lib/dolibarr/documents/install.lock") }
-end
-
 
 template "#{deploy[:deploy_to]}/current/htdocs/conf/conf.php" do
   source "conf.php.erb"
   owner "apache"
   group "apache"
-  mode "0444"
+  mode "0644"
   variables(
     :dbhost => (deploy[:database][:host] rescue nil),
     :dbpwd => (deploy[:database][:password] rescue nil)
