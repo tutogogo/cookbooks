@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ChangeResourceRecordSetsRequest xmlns="https://route53.amazonaws.com/doc/2012-12-12/">
+   <ChangeBatch>
+      <Comment>
+      This change batch creates changes the A record for admin.tutogogo.com. from
+      </Comment>
+      <Changes>
+         <Change>
+            <Action>DELETE</Action>
+            <ResourceRecordSet>
+               <Name>admin.tutogogo.com.</Name>
+               <Type>A</Type>
+               <TTL>300</TTL>
+               <ResourceRecords>
+                  <ResourceRecord>
+                     <Value>DNSIP</Value>
+                  </ResourceRecord>
+               </ResourceRecords>
+            </ResourceRecordSet>
+         </Change>
+         <Change>
+            <Action>CREATE</Action>
+            <ResourceRecordSet>
+               <Name>admin.tutogogo.com.</Name>
+               <Type>A</Type>
+               <TTL>300</TTL>
+               <ResourceRecords>
+                  <ResourceRecord>
+                     <Value>NEWIP</Value>
+                  </ResourceRecord>
+               </ResourceRecords>
+            </ResourceRecordSet>
+         </Change>
+      </Changes>
+   </ChangeBatch>
+</ChangeResourceRecordSetsRequest>
