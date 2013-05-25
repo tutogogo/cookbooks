@@ -7,7 +7,7 @@ end
  node[:opsworks][:layers]["#{layer}"][:instances].each do |instance, names|
 
   execute "add_node_cacti" do
-	 command "/home/ec2-user/scripts/add_node_cacti.sh #{instance} 2>/dev/null"
+	 command "/home/ec2-user/scripts/add_node_cacti.sh #{instance} >/dev/null 2>&1"
   end
  
   execute "create_inventaire_instances" do
@@ -21,16 +21,18 @@ end
 bash "clean_obsolete_instance" do
   user "root"
   code <<-EOH
-  LST_SVR=$(/usr/bin/php /var/lib/cacti/cli/remove_device.php --list-devices 2>/dev/null | awk '{ print $1 }' | tail -n+2)
+  LST_SVR=$(/usr/bin/php /var/lib/cacti/cli/remove_device.php --list-devices 2>/dev/null | awk '{ print $2 }' | tail -n+2)
   echo "List servers in cacti => $LST_SVR"
+  echo "List servers actives =>" 
+  cat /tmp/inventaire_instances_cacti
 	for i in $LST_SVR
 	do
 		EX=$(grep $i /tmp/inventaire_instances_cacti)
 		if [[ ! -n $EX ]]
 		then 
 		     echo "Remove $i"
-		     NODE_ID=`/usr/bin/php /var/lib/cacti/cli/remove_device.php  --list-devices | grep $i | awk '{ print $1 }'`
-			/usr/bin/php /var/lib/cacti/cli/remove_device.php  --device-id=$NODE_ID			
+		     NODE_ID=`/usr/bin/php /var/lib/cacti/cli/remove_device.php  --list-devices 2>/dev/null | grep $i | awk '{ print $1 }'`
+			/usr/bin/php /var/lib/cacti/cli/remove_device.php  --device-id=$NODE_ID	2>/dev/null
 		fi
 	done
 	rm -f /tmp/inventaire_instances_cacti
