@@ -1,10 +1,8 @@
 execute "init_inventaire_instances" do
-   command ">/tmp/inventaire_instances"
+   command ">/tmp/inventaire_instances_cacti"
 end
 
-my-layers = ['php-app', 'db-master', 'admin'] 
-
-my-layers.each do |layer|
+['php-app','db-master','admin'].each do |layer|
 
  node[:opsworks][:layers]["#{layer}"][:instances].each do |instance, names|
 
@@ -13,9 +11,27 @@ my-layers.each do |layer|
   end
  
   execute "create_inventaire_instances" do
-	 command "echo #{instance} >> /tmp/inventaire_instances"
+	 command "echo #{instance} >> /tmp/inventaire_instances_cacti"
   end
  end
  
+end
+
+# Purge instances obsoletes
+bash "clean_obsolete_instance" do
+  user "root"
+  code <<-EOH
+  LST_SVR=$(/usr/bin/php /var/lib/cacti/cli/remove_device.php --list-devices 2>/dev/null | awk '{ print $1 }' | tail -n+2)
+	for i in $LST_SVR
+	do
+		EX=$(grep $i /tmp/inventaire_instances_cacti)
+		if [[ -n $EX ]]
+		then
+		     NODE_ID=`/usr/bin/php /var/lib/cacti/cli/remove_device.php  --list-devices | grep $i | awk '{ print $1 }'`
+			/usr/bin/php /var/lib/cacti/cli/remove_device.php  --device-id=$NODE_ID			
+		fi
+	done
+	rm -f /tmp/inventaire_instances_cacti
+  EOH
 end
 
