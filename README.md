@@ -1,7 +1,12 @@
 Use with Aws opsworks
 
-Utilities :
+My own cookbook : my-opsworks
 
-Mysql databse
-Nagios
-Cacti
+Cookbooks from opscode cookbooks :
+mysql
+database
+aws
+openssl
+
+
+
