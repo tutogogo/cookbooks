@@ -44,8 +44,8 @@ template "/etc/cacti/db.php" do
   )
 end
 
-file "/etc/cron.d/cacti" do
-  content "*/5 * * * *    cacti   /usr/bin/php /usr/share/cacti/poller.php > /dev/null 2>&1"
+file "/var/spool/cron/cacti" do
+  content "*/5 * * * *  /usr/bin/php /usr/share/cacti/poller.php > /dev/null 2>&1"
   owner "root"
   group "root"
   mode "0644"
