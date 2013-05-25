@@ -7,7 +7,7 @@ end
  node[:opsworks][:layers]["#{layer}"][:instances].each do |instance, names|
 
   execute "add_node_cacti" do
-	 command "/home/ec2-user/scripts/add_node_cacti.sh #{instance} >/dev/null 2>&1"
+	 command "/home/ec2-user/scripts/add_node_cacti.sh #{instance}"
   end
  
   execute "create_inventaire_instances" do
