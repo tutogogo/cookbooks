@@ -1,7 +1,7 @@
 cookbook_file "/home/ec2-user/.aws-secrets" do
   source "aws-secrets"
-  owner "ec2-user"
-  group "ec2-user"
+  owner "root"
+  group "root"
   mode "0600"
   action :create
 end
