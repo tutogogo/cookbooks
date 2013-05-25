@@ -44,12 +44,16 @@ template "/etc/cacti/db.php" do
   )
 end
 
-file "/var/spool/cron/cacti" do
+file "/home/ec2-user/cacti_cron" do
   content "*/5 * * * *  /usr/bin/php /usr/share/cacti/poller.php > /dev/null 2>&1"
   owner "root"
   group "root"
   mode "0644"
   action :create
+end
+
+execute "activate_crontab" do
+  command "crontab -u cacti /home/ec2-user/cacti_cron"
 end
 
 cookbook_file "/etc/httpd/conf.d/cacti.conf" do
