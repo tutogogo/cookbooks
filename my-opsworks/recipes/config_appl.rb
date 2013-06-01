@@ -15,12 +15,16 @@ directory "/var/lib/dolibarr/documents" do
   not_if { ::File.directory?("/var/lib/dolibarr/documents") }
 end
 
+
+db_node = node[:opsworks][:layers]['database'][:instances].collect{|instance, names| names["private_ip"]}.first rescue nil
+
+unless db_node.nil?
+
 mount "/var/lib/dolibarr/documents" do
-    device "#{deploy[:database][:host]}:/vol/mysql/documents"
+    device "#{db_node}:/vol/mysql/documents"
     fstype "nfs"
     options "rw"
     action :mount
-    not_if { deploy[:database][:host].nil? }
 end
 
 
@@ -30,8 +34,10 @@ template "#{deploy[:deploy_to]}/current/htdocs/conf/conf.php" do
   group "apache"
   mode "0644"
   variables(
-    :dbhost => (deploy[:database][:host] rescue nil),
-    :dbpwd => (deploy[:database][:password] rescue nil)
+    :dbhost => db_node,
+    :dbname => node[:'my-opsworks'][:'dolibarr_database'],
+    :dbuser => node[:'my-opsworks'][:'dolibarr_username'],
+    :dbpwd => node[:'my-opsworks'][:'dolibarr_password']
   )
 only_if do
      File.directory?("#{deploy[:deploy_to]}/current")
