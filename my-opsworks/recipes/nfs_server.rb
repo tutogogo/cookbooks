@@ -10,11 +10,13 @@ service "nfs" do
   action [ :enable, :start ]
 end
 
+
 directory "/vol/mysql/documents" do
   owner "root"
   group "root"
   mode 0777
   action :create
+  recursive true
   not_if { ::File.exists?("/vol/mysql/documents") }
 end
 
