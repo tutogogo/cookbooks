@@ -1,3 +1,5 @@
+node.set['mysql']['bind_address'] = "0.0.0.0"
+
 include_recipe "mysql::ruby"
 include_recipe "mysql::client"
 include_recipe "mysql::server"
