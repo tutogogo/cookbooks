@@ -19,7 +19,7 @@ end
 
 end
 
-node[:opsworks][:layers]["db-master"][:instances].each do |instance, names|
+node[:opsworks][:layers]["database"][:instances].each do |instance, names|
 template "/etc/nagios/remotehost/#{instance}.cfg" do
   source "db_server.cfg.erb"
   owner "root"

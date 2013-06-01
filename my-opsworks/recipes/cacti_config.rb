@@ -2,7 +2,7 @@ execute "init_inventaire_instances" do
    command ">/tmp/inventaire_instances_cacti"
 end
 
-['php-app','db-master','admin'].each do |layer|
+['php-app','database','admin'].each do |layer|
 
  node[:opsworks][:layers]["#{layer}"][:instances].each do |instance, names|
 
