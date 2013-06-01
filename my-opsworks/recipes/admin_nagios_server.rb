@@ -28,7 +28,7 @@ template "/etc/nagios/cgi.cfg" do
   )
 end
 
-admin_node = node[:opsworks][:layers]['admin'][:instances].collect{|instance, names| names["private_ip"]}.first rescue nil
+admin_node = node[:opsworks][:instance][:hostname]
 
 template "/etc/nagios/objects/localhost.cfg" do
   source "admin_server.cfg.erb"
