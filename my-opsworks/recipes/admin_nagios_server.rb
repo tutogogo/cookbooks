@@ -7,12 +7,6 @@ package "nagios-plugins-all" do
 end
 
 
-
-service "nagios" do
-  action [ :enable, :start ]
-end
-
-
 execute "create_admin_pwd" do
   command "htpasswd -b -c /etc/nagios/passwd #{node[:"my-opsworks"][:nagios_admin_user]} #{node[:"my-opsworks"][:nagios_admin_pwd]}"
 end
@@ -38,4 +32,8 @@ template "/etc/nagios/objects/localhost.cfg" do
   variables(
     :admin_host => admin_node
   )
+end
+
+service "nagios" do
+  action [ :enable, :start ]
 end
