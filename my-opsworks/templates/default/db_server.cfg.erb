@@ -1,7 +1,7 @@
 define host{
         use                     linux-server            ; Name of host template to use
         host_name               <%= @db_host %>
-        alias                   Web Server <%= @web_host %>
+        alias                   Database Server <%= @web_host %>
         address                 <%= @db_host %>
         }
 
