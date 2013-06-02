@@ -13,6 +13,19 @@ sleep 2
 # Gest new node id
 NODE_ID=`sudo php remove_device.php --list-devices | grep ${SVR_NAME} | awk '{ print $1 }'`
 
+
+# Add graph Load Average
+echo -e  "Add graph Load Average to node ${nodename}\n" 
+php add_graphs.php  --graph-type=cg --host-id=$NODE_ID --graph-template-id=11
+echo -e "CR=$?\n" 
+sleep 2
+
+# Add graph Memory Usage
+echo -e  "Add graph Memory Usage to node ${nodename}\n" 
+php add_graphs.php  --graph-type=cg --host-id=$NODE_ID --graph-template-id=13
+echo -e "CR=$?\n" 
+sleep 2
+
 # Add graph CPU Usage
 echo -e  "Add graph CPU Usage to node ${nodename}\n" 
 php add_graphs.php  --graph-type=cg --host-id=$NODE_ID --graph-template-id=4
