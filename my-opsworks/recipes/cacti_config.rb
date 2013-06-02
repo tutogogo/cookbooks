@@ -2,6 +2,22 @@ execute "init_inventaire_instances" do
    command ">/tmp/inventaire_instances_cacti"
 end
 
+directory "/home/ec2-user/scripts" do
+  owner "ec2-user"
+  group "ec2-user"
+  mode "0755"
+  action :create
+  not_if { ::File.directory?("/home/ec2-user/scripts") }
+end
+
+cookbook_file "/home/ec2-user/scripts/add_node_cacti.sh" do
+  source "add_node_cacti.sh"
+  owner "ec2-user"
+  group "ec2-user"
+  mode "0755"
+  action :create
+end
+
 ['php-app','database','admin'].each do |layer|
 
  node[:opsworks][:layers]["#{layer}"][:instances].each do |instance, names|

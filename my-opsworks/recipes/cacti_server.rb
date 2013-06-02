@@ -64,22 +64,6 @@ cookbook_file "/etc/httpd/conf.d/cacti.conf" do
   action :create
 end
 
-directory "/home/ec2-user/scripts" do
-  owner "ec2-user"
-  group "ec2-user"
-  mode "0755"
-  action :create
-  not_if { ::File.directory?("/home/ec2-user/scripts") }
-end
-
-cookbook_file "/home/ec2-user/scripts/add_node_cacti.sh" do
-  source "add_node_cacti.sh"
-  owner "ec2-user"
-  group "ec2-user"
-  mode "0755"
-  action :create
-end
-
 cookbook_file "/var/lib/cacti/cli/remove_device.php" do
   source "remove_device.php"
   owner "root"
