@@ -10,6 +10,7 @@ sudo php add_device.php --description="${nodename}" --ip="${SVR_NAME}" --templat
 echo -e "CR=$?\n" 
 sleep 2
 
+
 # Gest new node id
 NODE_ID=`sudo php remove_device.php --list-devices | grep ${SVR_NAME} | awk '{ print $1 }'`
 
