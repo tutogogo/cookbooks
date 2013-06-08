@@ -1,9 +1,10 @@
-Use with Aws opsworks
+This repository holds Cookbooks for use with Aws Opsworks
 
-My own cookbook : 
+Cookbook that I develope : 
 my-opsworks
 
-Cookbooks from opscode cookbooks :
+
+Cookbooks that I get from Opscode : https://github.com/opscode-cookbooks
 
 mysql
 database
@@ -13,3 +14,8 @@ xfs
 postgresql
 apt
 build-essential
+
+
+Cookbook that I modified to adapt to Opsworks environement : 
+
+mysql
