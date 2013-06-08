@@ -11,6 +11,7 @@ bash "create_swap" do
   EOH
 end
 
+
 mount "/dev/null" do
  pass 0
  device "/swapfile"
