@@ -1,4 +1,4 @@
-This repository holds Cookbooks for use with Aws Opsworks
+This repository holds Custom Cookbooks for use with Aws Opsworks
 
 Cookbook that I develope : 
 my-opsworks
