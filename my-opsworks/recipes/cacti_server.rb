@@ -70,7 +70,32 @@ cookbook_file "/var/lib/cacti/cli/remove_device.php" do
   group "root"
   mode "0755"
   action :create
+  not_if {File.exist?("/var/lib/cacti/cli/remove_device.php")}
 end
+
+cookbook_file "/home/ec2-user/scripts/add_cacti_template.sh" do
+  source "add_cacti_template.sh"
+  owner "ec2-user"
+  group "ec2-user"
+  mode "0755"
+  action :create
+end
+
+cookbook_file "/tmp/Cacti_Net-SNMP_DevIO_v3.1.zip" do
+  source "Cacti_Net-SNMP_DevIO_v3.1.zip"
+  owner "root"
+  group "root"
+  mode "0755"
+  action :create
+end
+
+bash "create_cacti_template" do
+  user "root"
+  code <<-EOH
+  /home/ec2-user/scripts/add_cacti_template.sh
+  EOH
+end
+
 
 service "httpd" do
   action :restart
