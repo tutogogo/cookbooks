@@ -27,6 +27,18 @@ cookbook_file "/home/ec2-user/scripts/backup-mysql-into-s3.sh" do
   action :create
 end
 
-execute "s3cmd ls" do
-   command "s3cmd ls"
+
+template "/home/ec2-user/ec2-user_cron" do
+  source "ec2-user_cron.erb"
+  owner "ec2-user"
+  group "ec2-user"
+  mode "0755"
+  variables(
+    :root_pwd => node['mysql']['server_root_password']
+  )
 end
+
+execute "activate_crontab" do
+  command "crontab -u ec2-user /home/ec2-user/ec2-user_cron"
+end
+
