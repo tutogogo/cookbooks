@@ -1,5 +1,5 @@
 [default]
-access_key = AKIAJ7O4QM63B7PSC3SQ
+access_key = AKIAJ7O4QM63B7P
 bucket_location = US
 cloudfront_host = cloudfront.amazonaws.com
 cloudfront_resource = /2010-07-15/distribution
@@ -28,7 +28,7 @@ proxy_port = 0
 recursive = False
 recv_chunk = 4096
 reduced_redundancy = False
-secret_key = VB8e+Nuf7D7O+3fKTqIPnLqDPUqTdlNZCSoxvyZT
+secret_key = VB8e+Nuf7D7O+3fKTqIPUqTdlNZCSoxvyZT
 send_chunk = 4096
 simpledb_host = sdb.amazonaws.com
 skip_existing = False
