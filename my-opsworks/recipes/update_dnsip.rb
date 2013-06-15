@@ -4,6 +4,7 @@ cookbook_file "/home/ec2-user/.aws-secrets" do
   group "root"
   mode "0600"
   action :create
+  not_if {File.exist?("/home/ec2-user/.aws-secrets")}
 end
 
 cookbook_file "/home/ec2-user/dnscurl.pl" do
