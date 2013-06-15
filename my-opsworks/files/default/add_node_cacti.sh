@@ -46,13 +46,13 @@ echo -e "CR=$?\n"
 sleep 2
 
 # Disk I/O bytes/s
-#echo -e $BLANCLAIR "Add graph Template Disk IO - Bytes per Second to node ${nodename}\n" $NORMAL
-#sudo php add_graph_template.php  --graph-template-id=35 --host-id=$NODE_ID
-#echo -e $JAUNE "CR=$?\n" $NORMAL
+echo -e "Add graph Template Disk IO - Bytes per Second to node ${nodename}\n"
+sudo php add_graph_template.php  --graph-template-id=35 --host-id=$NODE_ID
+echo -e "CR=$?\n"
 # Add Data Query
-#echo -e $BLANCLAIR "Add Data Query SNMP - Get Disk IO to node ${nodename} \n" $NORMAL
-#sudo php add_graphs.php --host-id=$NODE_ID --graph-type=ds --graph-template-id=35 --snmp-query-id=10 --snmp-query-type-id=23 --snmp-field=hrDiskIODescr --snmp-value=xvda1
-#echo -e $JAUNE "CR=$?\n" $NORMAL
+echo -e "Add Data Query SNMP - Get Disk IO to node ${nodename} \n"
+sudo php add_graphs.php --host-id=$NODE_ID --graph-type=ds --graph-template-id=35 --snmp-query-id=10 --snmp-query-type-id=23 --snmp-field=diskIODevice --snmp-value=xvda1
+echo -e "CR=$?\n"
 
 
 # Add node to tree "Environnement dolibarr"
