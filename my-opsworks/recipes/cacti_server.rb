@@ -89,13 +89,9 @@ cookbook_file "/tmp/Cacti_Net-SNMP_DevIO_v3.1.zip" do
   action :create
 end
 
-bash "create_cacti_template" do
-  user "root"
-  code <<-EOH
-  /home/ec2-user/scripts/add_cacti_template.sh
-  EOH
+execute "create_cacti_template" do
+  command "/home/ec2-user/scripts/add_cacti_template.sh"
 end
-
 
 service "httpd" do
   action :restart
