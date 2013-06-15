@@ -23,7 +23,7 @@ cookbook_file "/home/ec2-user/scripts/backup-mysql-into-s3.sh" do
   source "backup-mysql-into-s3.sh"
   owner "ec2-user"
   group "ec2-user"
-  mode "0655"
+  mode "0755"
   action :create
 end
 
